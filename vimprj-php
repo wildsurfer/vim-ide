@@ -1,0 +1,6 @@
+set tags=.tags,~/.zend_framework_tags
+let g:easytags_dynamic_files = 2
+
+if has("autocmd")
+autocmd BufEnter *.phtml set syn=php
+endif
