@@ -12,3 +12,8 @@ Switch to the `~/.vim` directory, and fetch submodules:
     cd ~/.vim
     git submodule init
     git submodule update
+
+Add new plugin:
+
+    git submodule add git://github.com/altercation/vim-colors-solarized.git bundle/vim-colors-solarize
+
