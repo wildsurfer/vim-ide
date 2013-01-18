@@ -1,6 +1,7 @@
 "Pathogen
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-
+runtime bundle/pathogen/autoload/pathogen.vim
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 "General
 syntax enable
@@ -48,4 +49,11 @@ set hidden
 "Filetype plugins
 filetype plugin indent on
 
+"Color
+let g:solarized_termcolors=256
+colorscheme solarized
+set background=dark
+
+"Indexer options
+let g:indexer_ctagsDontSpecifyFilesIfPossible = 1
 
