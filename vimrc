@@ -54,6 +54,27 @@ let g:solarized_termcolors=256
 colorscheme solarized
 set background=dark
 
-"Indexer options
-let g:indexer_ctagsDontSpecifyFilesIfPossible = 1
+" PHPDocumentor
+source ~/.vim/plugins/php-doc.vim
+
+" PHPDocumentor config
+let g:phpdoc_tags = {
+            \   'class' : {
+            \       'author'    :   'Ivan Kuznetsov <kuzma.wm@gmail.com>',
+            \       'copyright' :   '© ' . strftime('%Y') . ' ArtMyWeb.com',
+            \       'since'     :   strftime('%Y-%m-%d'),
+            \   },
+            \   'function' : {
+            \       'author'        :   'Ivan Kuznetsov <kuzma.wm@gmail.com>',
+            \       'since'         :   strftime('%Y-%m-%d'),
+            \   },
+            \   'property' : {
+            \       'since'         :   strftime('%Y-%m-%d'),
+            \
+            \   }
+            \}
+
+
+" nginx filetype hilight
+au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif
 
