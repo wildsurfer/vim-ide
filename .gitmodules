@@ -19,6 +19,6 @@
 [submodule "bundle/vcscommand"]
 	path = bundle/vcscommand
 	url = https://github.com/vim-scripts/vcscommand.vim
-[submodule "bundle/phpDocumentor"]
-	path = bundle/phpDocumentor
-	url = https://github.com/vexxor/phpdoc.vim
+[submodule "bundle/nginx.vim"]
+	path = bundle/nginx.vim
+	url = https://github.com/vim-scripts/nginx.vim
