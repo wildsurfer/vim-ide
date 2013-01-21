@@ -57,3 +57,29 @@ set background=dark
 "Indexer options
 let g:indexer_ctagsDontSpecifyFilesIfPossible = 1
 
+" PHPDocumentor config
+
+let g:phpdoc_tags = {
+            \   'class' : {
+            \       'version'   :   '$Id',
+            \       'package'   :   'Mfn',
+            \       'author'    :   'Ivan Kuznetsov <kuzma.wm@gmail.com>',
+            \       'copyright' :   '© ' . strftime('%Y') . 'ArtMyWeb.com',
+            \       'since'     :   strftime('%Y-%m-%d'),
+            \   },
+            \   'function' : {
+            \       'author'        :   'Ivan Kuznetsov <kuzma.wm@gmail.com>',
+            \       'since'         :   strftime('%Y-%m-%d'),
+            \   },
+            \   'property' : {
+            \       'since'         :   strftime('%Y-%m-%d'),
+            \
+            \   }
+            \}
+
+
+" PHPDocumentor script bound to Control-K
+autocmd FileType php inoremap <C-k> <ESC>:call PhpDocSingle()<CR>i
+autocmd FileType php nnoremap <C-k> :call PhpDocSingle()<CR>
+autocmd FileType php vnoremap <C-k> :call PhpDocRange()<CR>
+
