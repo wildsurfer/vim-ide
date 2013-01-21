@@ -15,7 +15,7 @@ Switch to the `~/.vim` directory, and fetch submodules:
 
 Compile Command-T library
 
-    cd ~/.vim/ruby/command-t
+    cd ~/.vim/bundle/Command-T/ruby/command-t
     ruby extconf.rb
     make
 
