@@ -78,3 +78,5 @@ let g:phpdoc_tags = {
 " nginx filetype hilight
 au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif
 
+" Vdebug port change to prevent conflicts with php-fpm
+let g:vdebug_options = {"port":9001}
