@@ -154,10 +154,11 @@ endif
 " Enable phpdoc. Automatically inject docs when coding.
 if g:phpdoc_DefineAutoCommands
     augroup phpdoc
-        autocmd BufEnter *.php inoremap { {<Esc>:call PHPDOC_DecideClassOrFunc()<CR>a
-        autocmd BufEnter *.php inoremap ; ;<Esc>:call PHPDOC_ClassVar()<CR>a
-        autocmd BufLeave *.php iunmap {
-        autocmd BufLeave *.php iunmap ;
+        autocmd BufEnter *.php inoremap <buffer> { {<Esc>:call PHPDOC_DecideClassOrFunc()<CR>a
+        autocmd BufEnter *.php inoremap <buffer> ; ;<Esc>:call PHPDOC_ClassVar()<CR>a
+        " TODO remove this dirty fix
+        "autocmd BufLeave *.php iunmap <buffer> {
+        "autocmd BufLeave *.php iunmap <buffer> ;
     augroup END
     " Keep your braces balanced!}}}
 endif " g:phpdoc_DefineAutoCommands
