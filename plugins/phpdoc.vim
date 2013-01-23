@@ -122,17 +122,7 @@ endif
 " Only 'class', 'function' and 'property' are recognized, their tags and
 " content is totally up to you.
 if !exists('g:phpdoc_tags')
-    let g:phpdoc_tags = { 
-	\	'class' : {
-	\		'version' : ' $Id',
-	\		'author'  : '  TINOCO Eric <e.tinoco@pixmania-group.com>' ,
-	\		'date'    : '  ' . strftime('%Y/%m/%d')
-	\	},
-	\	'function' : {
-	\		'author' : '  TINOCO Eric <e.tinoco@pixmania-group.com>' ,
-	\		'date'   : '  ' . strftime('%Y/%m/%d')
-	\	},
-	\}
+    let g:phpdoc_tags = {}
 endif
 
 " List of recognized elements we generate witha phpdoc. The default is to
@@ -152,10 +142,10 @@ let g:phpdoc_generate = [
             \ 'func_params_name',
             \ 'func_params_optional',
             \ 'func_return',
-            \ 'func_short_space',
             \
             \ 'prop',
             \ 'prop_todo',
+            \ 'prop_todo_space',
             \ 'prop_var',
             \ 'prop_var_default',
             \ ]
@@ -164,7 +154,7 @@ endif
 " Enable phpdoc. Automatically inject docs when coding.
 if g:phpdoc_DefineAutoCommands
     augroup phpdoc
-        autocmd BufEnter *.php inoremap { {<Esc>:call PHPDOC_DecideClassOrFunc()<CR>a<CR>}<C-O>O
+        autocmd BufEnter *.php inoremap { {<Esc>:call PHPDOC_DecideClassOrFunc()<CR>a
         autocmd BufEnter *.php inoremap ; ;<Esc>:call PHPDOC_ClassVar()<CR>a
         autocmd BufLeave *.php iunmap {
         autocmd BufLeave *.php iunmap ;
@@ -320,13 +310,13 @@ function! PHPDOC_ClassHeader(line, back)
     let indent = matchstr(line, '^\s*')
     let @z = indent . "/**\n"
     if PHPDOC_generate('class_short')
-        let @z=@z . indent . " * @desc      TODO short description.\n"
+        let @z=@z . indent . " * TODO: short description.\n"
         if PHPDOC_generate('class_short_space')
             let @z=@z . indent . " * \n"
         endif
     endif
     if PHPDOC_generate('class_long')
-        let @z=@z . indent . " * @more      TODO long description.\n"
+        let @z=@z . indent . " * TODO: long description.\n"
         if PHPDOC_generate('class_long_space')
             let @z=@z . indent . " * \n"
         endif
@@ -373,15 +363,11 @@ function! PHPDOC_FuncHeader(line, back)
     
     let @z=@z . indent . "/**\n"
     if PHPDOC_generate('func_short')
-        let @z=@z . indent . " * @desc     TODO short description.\n"
+        let @z=@z . indent . " * TODO: short description.\n"
         if PHPDOC_generate('func_short_space')
             let @z=@z . indent . " * \n"
         endif
     endif
-
-    let @z=@z . PHPDOC_UserTags('function', indent)
-	let @z=@z . indent . " * \n"
-
     if PHPDOC_generate('func_params')
         " evaluate each parameter for it's prefix for type decision
         if line =~ '(.*)'
@@ -400,7 +386,7 @@ function! PHPDOC_FuncHeader(line, back)
                 " If we've a typehint, use that as type instead looking at the prefix
                 let typehint = matchlist(parameter, '\([A-Za-z0-9_:]\+\)\s\+\$')
                 if exists('typehint[1]')
-                    if len(typehint[1]) > longest_paramType 
+                    if len(typehint[1]) > longest_paramType
                         let longest_paramType = len(typehint[1])
                     endif
                 else
@@ -424,13 +410,13 @@ function! PHPDOC_FuncHeader(line, back)
                 " If we've a typehint, use that as type instead looking at the prefix
                 let typehint = matchlist(parameter, '\([A-Za-z0-9:_]\+\)\s\+\$')
                 if exists('typehint[1]')
-                    let @z=@z . indent . " * @param    " . typehint[1]
+                    let @z=@z . indent . " * @param " . typehint[1]
                     let @z=@z . repeat(' ', longest_paramType - len(typehint[1]))
                 else
                     let index = matchend(parameter, '\$')
                     let prefix = matchstr(parameter, '[A-Za-z]', index)
                     let paramType = PHPDOC_GetPHPDocType(prefix)
-                    let @z=@z . indent . " * @param    " . paramType
+                    let @z=@z . indent . " * @param " . paramType
                     let @z=@z . repeat(' ', longest_paramType - len(paramType))
                 endif
                 if PHPDOC_generate('func_params_name')
@@ -453,9 +439,11 @@ function! PHPDOC_FuncHeader(line, back)
         endif
     endif
 
-	if PHPDOC_generate('func_return') && showReturnType
-        let @z=@z . indent . " * @return   " . returntype . "\n"
+    if PHPDOC_generate('func_return') && showReturnType
+        let @z=@z . indent . " * @return " . returntype . "\n"
     endif
+
+    let @z=@z . PHPDOC_UserTags('function', indent)
 
     let @z=@z . indent . " */\n"
     " store current cursor position ...
@@ -497,23 +485,17 @@ function! PHPDOC_ClassVar()
     let index = matchend(line, '\$_\?')
     let prefix = matchstr(line, '[A-Za-z]', index) 
 
-    let indentlen = matchend( line, '^\s*' )
-    let access = matchstr( line, '^\s*\(public\|protected\|private\|static\|var\)', indentlen )
-    if access =~ 'var'
-        let access = 'public'
-    endif
-
     let type = PHPDOC_GetPHPDocType(prefix)
 
     let @z= indent . "/**\n"
     if PHPDOC_generate('prop_todo')
-        let @z=@z . indent . " * @desc    TODO\n"
+        let @z=@z . indent . " * TODO: description.\n"
         if PHPDOC_generate('prop_todo_space')
             let @z=@z . indent . " * \n"
         endif
     endif
     if PHPDOC_generate('prop_var')
-        let @z=@z . indent . " * @var     " . type
+        let @z=@z . indent . " * @var " . type
     endif
     if PHPDOC_generate('prop_var_default')
         let paramDefault = matchlist(line, '\$[A-Za-z0-9_]\+\s*=\s*\(.*\);')
@@ -522,8 +504,7 @@ function! PHPDOC_ClassVar()
         endif
     endif
     let @z=@z . "\n"
-    let @z=@z . indent . " * @access  " . access
-    let @z=@z . "\n"
+
 
     let @z=@z . PHPDOC_UserTags('property', indent)
 
