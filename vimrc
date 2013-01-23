@@ -19,6 +19,8 @@ set smarttab
 set nowrap
 set showmatch     " set show matching parenthesis
 
+set colorcolumn=120
+
 "Indent
 set autoindent
 set copyindent
@@ -55,7 +57,7 @@ colorscheme solarized
 set background=dark
 
 " PHPDocumentor
-source ~/.vim/plugins/php-doc.vim
+source ~/.vim/plugins/phpdoc.vim
 
 " PHPDocumentor config
 let g:phpdoc_tags = {
@@ -78,5 +80,6 @@ let g:phpdoc_tags = {
 " nginx filetype hilight
 au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif
 
-" Vdebug port change to prevent conflicts with php-fpm
-let g:vdebug_options = {"port":9001}
+" Vdebug port change to prevent conflicts with php-fpm. Also disable break on
+" open
+let g:vdebug_options = {"break_on_open":0,"port":9001}
