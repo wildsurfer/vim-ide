@@ -25,3 +25,21 @@
 [submodule "bundle/phpcomplete"]
 	path = bundle/phpcomplete
 	url = https://github.com/shawncplus/phpcomplete.vim
+[submodule "bundle/taglist"]
+	path = bundle/taglist
+	url = git://github.com/vim-scripts/taglist.vim
+[submodule "bundle/MatchTag"]
+	path = bundle/MatchTag
+	url = git://github.com/gregsexton/MatchTag.git
+[submodule "bundle/jsruntime.vim"]
+	path = bundle/jsruntime.vim
+	url = git://github.com/michalliu/jsruntime.vim
+[submodule "bundle/jsoncodecs.vim"]
+	path = bundle/jsoncodecs.vim
+	url = git://github.com/michalliu/jsoncodecs.vim
+[submodule "bundle/sourcebeautify.vim"]
+	path = bundle/sourcebeautify.vim
+	url = git://github.com/michalliu/sourcebeautify.vim
+[submodule "bundle/vim-phpqa"]
+	path = bundle/vim-phpqa
+	url = git://github.com/joonty/vim-phpqa

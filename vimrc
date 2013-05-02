@@ -19,14 +19,14 @@ set smarttab
 set nowrap
 set showmatch     " set show matching parenthesis
 
-set colorcolumn=120
+set colorcolumn=80
 
 "Indent
 set autoindent
 set copyindent
 
 "Detect encoding
-set ffs=unix,dos,mac
+set ffs=unix
 set fencs=utf-8,cp1251,koi8-r,ucs-2,cp866
 
 "Undo
@@ -83,3 +83,7 @@ au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfil
 " Vdebug port change to prevent conflicts with php-fpm. Also disable break on
 " open
 let g:vdebug_options = {"break_on_open":0,"port":9001}
+
+" PHPMD
+let g:phpqa_messdetector_ruleset = "~/.vim/phpmd.xml"
+let g:phpqa_codesniffer_args = "--standard=Zend"

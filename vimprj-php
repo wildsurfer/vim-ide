@@ -1,6 +1,9 @@
 set tags=.tags
 let g:easytags_dynamic_files = 2
 
+filetype plugin on
+au FileType php set omnifunc=phpcomplete#CompletePHP
+
 if has("autocmd")
 autocmd BufEnter *.phtml set syn=php
 endif
