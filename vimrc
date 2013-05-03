@@ -56,30 +56,6 @@ let g:solarized_termcolors=256
 colorscheme solarized
 set background=dark
 
-" PHPDocumentor
-source ~/.vim/plugins/phpdoc.vim
-
-" PHPDocumentor config
-let g:phpdoc_tags = {
-            \   'class' : {
-            \       'author'    :   'Ivan Kuznetsov <kuzma.wm@gmail.com>',
-            \       'copyright' :   '© ' . strftime('%Y') . ' www.ArtMyWeb.com',
-            \       'since'     :   strftime('%Y-%m-%d'),
-            \   },
-            \   'function' : {
-            \       'author'        :   'Ivan Kuznetsov <kuzma.wm@gmail.com>',
-            \       'since'         :   strftime('%Y-%m-%d'),
-            \   },
-            \   'property' : {
-            \       'since'         :   strftime('%Y-%m-%d'),
-            \
-            \   }
-            \}
-
-
-" nginx filetype hilight
-au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif
-
 " Vdebug port change to prevent conflicts with php-fpm. Also disable break on
 " open
 let g:vdebug_options = {"break_on_open":0,"port":9001}
