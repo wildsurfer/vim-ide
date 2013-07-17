@@ -2,6 +2,7 @@
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#incubate()
 call pathogen#helptags()
+execute pathogen#infect()
 
 "General
 syntax enable
@@ -30,10 +31,14 @@ set ffs=unix
 set fencs=utf-8,cp1251,koi8-r,ucs-2,cp866
 
 "Undo
-set undodir=~/.vim_undo
+set undodir=~/.vim/undo
 set undofile
 set undolevels=1000 " maximum number of changes that can be undone
 set undoreload=10000 " maximum number lines to save for undo on a buffer reload
+
+"Backup and *.swp
+set backupdir=~/.vim/tmp,.
+set directory=~/.vim/tmp,.
 
 "Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight ExtraWhitespace ctermbg=darkred guibg=#382424
@@ -63,3 +68,7 @@ let g:vdebug_options = {"break_on_open":0,"port":9001}
 " PHPMD
 let g:phpqa_messdetector_ruleset = "~/.vim/phpmd.xml"
 let g:phpqa_codesniffer_args = "--standard=Zend"
+
+" vim-session
+let g:session_autoload="yes"
+let g:session_autosave="yes"
