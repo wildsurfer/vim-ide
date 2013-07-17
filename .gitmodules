@@ -43,3 +43,9 @@
 [submodule "bundle/comments"]
 	path = bundle/comments
 	url = git://github.com/vim-scripts/comments.vim
+[submodule "bundle/vim-session"]
+	path = bundle/vim-session
+	url = https://github.com/xolox/vim-session.git
+[submodule "bundle/vim-misc"]
+	path = bundle/vim-misc
+	url = https://github.com/xolox/vim-misc.git

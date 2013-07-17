@@ -72,3 +72,4 @@ let g:phpqa_codesniffer_args = "--standard=Zend"
 " vim-session
 let g:session_autoload="yes"
 let g:session_autosave="yes"
+let g:session_default_to_last="yes"
