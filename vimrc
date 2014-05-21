@@ -1,8 +1,7 @@
 "Pathogen
 runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#incubate()
-call pathogen#helptags()
 execute pathogen#infect()
+call pathogen#helptags()
 
 "General
 syntax enable
@@ -64,10 +63,6 @@ set background=dark
 " Vdebug port change to prevent conflicts with php-fpm. Also disable break on
 " open
 let g:vdebug_options = {"break_on_open":0,"port":9001}
-
-" PHPMD
-let g:phpqa_messdetector_ruleset = "~/.vim/phpmd.xml"
-let g:phpqa_codesniffer_args = "--standard=Zend"
 
 " vim-session
 let g:session_autoload="yes"
